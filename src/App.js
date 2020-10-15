@@ -1,18 +1,28 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Header from './components/layout/Header';
 import Nav from './components/layout/Nav';
+import Clients from './components/clients/Clients';
+import Products from './components/products/Products';
+import Orders from './components/orders/Orders';
 
 function App() {
   return (
-    <>
-    <Header/>
-    <div className="grid contenedor contenido-principal">
-      <Nav/>
-      <main class="caja-contenido col-9">
-        
-      </main>
-    </div>
-    </>
+    <Router>
+      <>
+      <Header/>
+      <div className="grid contenedor contenido-principal">
+        <Nav/>
+        <main class="caja-contenido col-9">
+          <Switch>
+            <Route exact path="/" component={Clients}/>
+            <Route exact path="/products" component={Products}/>
+            <Route exact path="/orders" component={Orders}/>
+          </Switch>
+        </main>
+      </div>
+      </>
+    </Router>
   )
 }
 
