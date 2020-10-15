@@ -13,7 +13,7 @@ function App() {
       <Header/>
       <div className="grid contenedor contenido-principal">
         <Nav/>
-        <main class="caja-contenido col-9">
+        <main className="caja-contenido col-9">
           <Switch>
             <Route exact path="/" component={Clients}/>
             <Route exact path="/products" component={Products}/>
