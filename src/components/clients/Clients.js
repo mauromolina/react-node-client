@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import axiosClient from '../../config/axios';
 import Client from './Client';
 
@@ -18,6 +19,9 @@ const Clients = () => {
     return ( 
         <>
             <h1>Clientes</h1>
+            <Link to={"/clients/new"} className="btn btn-verde nvo-cliente"> <i className="fas fa-plus-circle"></i>
+                Nuevo Cliente
+            </Link>
             <ul className="listado-clientes">
             {clients.map( client => (
                         <Client
