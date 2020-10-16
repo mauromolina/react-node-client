@@ -6,6 +6,7 @@ import Clients from './components/clients/Clients';
 import Products from './components/products/Products';
 import Orders from './components/orders/Orders';
 import NewClient from './components/clients/newClient';
+import EditClient from './components/clients/editClient';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Clients}/>
             <Route exact path="/clients/new" component={NewClient}/>
+            <Route exact path="/clients/edit/:id" component={EditClient}/>
             <Route exact path="/products" component={Products}/>
             <Route exact path="/orders" component={Orders}/>
           </Switch>
