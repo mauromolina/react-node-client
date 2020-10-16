@@ -14,7 +14,7 @@ const Clients = () => {
 
     useEffect(() => {
         requestApi();
-    }, []);
+    }, [clients]);
 
     return ( 
         <>
