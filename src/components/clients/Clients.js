@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import axiosClient from '../../config/axios';
 import Client from './Client';
+import Spinner from '../layout/Spinner';
 
 const Clients = () => {
 
@@ -9,12 +10,16 @@ const Clients = () => {
 
     const requestApi = async () => {
         const apiResponse = await axiosClient.get('/clients');
-        setClients(apiResponse.data.clients);
+        setTimeout(() => {
+            setClients(apiResponse.data.clients);
+        }, 2000);
     }
 
     useEffect(() => {
         requestApi();
     }, [clients]);
+
+    if(!clients.length) return <Spinner/>
 
     return ( 
         <>
