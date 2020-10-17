@@ -11,6 +11,7 @@ const NewOrder = (props) => {
     const [client, setClient] = useState({});
     const [search, setSearch] = useState('');
     const [products, setProducts] = useState([]);
+    const [total, setTotal] = useState(0);
 
     useEffect(() => {
         const getClient = async () => {
@@ -18,7 +19,8 @@ const NewOrder = (props) => {
             setClient(result.data);
         }
         getClient();
-    }, []);
+        updateTotal();
+    }, [products]);
 
     const searchProduct = async e => {
         e.preventDefault();
@@ -26,7 +28,7 @@ const NewOrder = (props) => {
         if(result.data[0]){
             let resultProduct = result.data[0];
             resultProduct.product = result.data[0]._id;
-            resultProduct.quantity = 0;
+            resultProduct.quantity = 1;
             setProducts([...products, resultProduct]);
         } else {
             Swal.fire(
@@ -39,6 +41,23 @@ const NewOrder = (props) => {
 
     const handleSearch = e => {
         setSearch(e.target.value);
+    }
+
+    const handleChange = (e, i) => {
+        const allProducts = [...products];
+        allProducts[i].quantity = e.target.value;
+        setProducts(allProducts);
+    }
+
+    const updateTotal = () => {
+        if(products.length === 0){
+            setTotal(0);
+            return;
+        }
+        let newTotal = 0;
+        products.map( product => newTotal += (product.quantity * product.price));
+        setTotal(newTotal);
+
     }
 
     const { name, surname, email, phone, company } = client;
@@ -64,16 +83,23 @@ const NewOrder = (props) => {
                         <ProductQuantityForm
                             key={product.product}
                             product={product}
+                            handleChange={handleChange}
+                            index={index}
                         />
                     ) )}
                 </ul>
-                <div className="campo">
-                    <label>Total:</label>
-                    <input type="number" name="price" placeholder="Precio" readOnly="readonly" />
-                </div>
-                <div className="enviar">
-                    <input type="submit" className="btn btn-azul" value="Agregar Pedido"/>
-                </div>
+                <p className="total">
+                    Total a pagar : <span>${total}</span>
+                </p>
+                { total > 0 ? (
+                    <form>
+                        <input 
+                            type="submit"
+                            className="btn btn-verde btn-block"
+                            value="Realizar pedido"
+                        />
+                    </form>
+                ) : null}
             </div>
         </>
      );

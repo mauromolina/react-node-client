@@ -1,20 +1,24 @@
 import React from 'react';
 
-const ProductQuantityForm = ({product}) => {
+const ProductQuantityForm = (props) => {
 
-    const { name, price, quantity} = product;
+    const { product, index, handleChange } = props;
 
     return ( 
         <li>
             <div className="texto-producto">
-                <p className="nombre">{name}</p>
-                <p className="precio">${price}</p>
+                <p className="nombre">{product.name}</p>
+                <p className="precio">${product.price}</p>
             </div>
             <div className="acciones">
                 <div className="contenedor-cantidad">
-                    <i className="fas fa-minus"></i>
-                    <p>{quantity}</p>
-                    <i className="fas fa-plus"></i>
+                    <input
+                        type="number"
+                        defaultValue="1"
+                        min="1" step="1"
+                        name="quantity"
+                        onChange={(e) => handleChange(e, index)}  
+                    />
                 </div>
                 <button type="button" className="btn btn-rojo">
                     <i className="fas fa-minus-circle"></i>
