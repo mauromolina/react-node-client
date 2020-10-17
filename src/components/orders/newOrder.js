@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Swal from 'sweetalert2';
+import { withRouter } from 'react-router-dom';
 import axiosClient from '../../config/axios';
 import SearchOrderForm from './searchOrderForm';
 import ProductQuantityForm from './productQuantityForm';
+
 
 const NewOrder = (props) => {
 
@@ -60,6 +62,35 @@ const NewOrder = (props) => {
 
     }
 
+    const deleteProduct = id => {
+        const allProducts = products.filter( product => product.product != id);
+        setProducts(allProducts);
+    }
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const order = {
+            "client": client._id,
+            "products": products,
+            "total": total
+        }
+        const response = await axiosClient.post('/orders', order);
+        if(response.status === 200){
+            Swal.fire(
+                'Perfecto!',
+                response.data.msg,
+                'success'
+            );
+        } else {
+            Swal.fire(
+                'Error',
+                'No se pudo registrar el pedido',
+                'error'
+            ); 
+        }
+        props.history.push('/orders');
+    }
+
     const { name, surname, email, phone, company } = client;
 
     return ( 
@@ -84,6 +115,7 @@ const NewOrder = (props) => {
                             key={product.product}
                             product={product}
                             handleChange={handleChange}
+                            deleteProduct={deleteProduct}
                             index={index}
                         />
                     ) )}
@@ -92,7 +124,8 @@ const NewOrder = (props) => {
                     Total a pagar : <span>${total}</span>
                 </p>
                 { total > 0 ? (
-                    <form>
+                    <form
+                        onSubmit={handleSubmit}>
                         <input 
                             type="submit"
                             className="btn btn-verde btn-block"
@@ -105,4 +138,4 @@ const NewOrder = (props) => {
      );
 }
  
-export default NewOrder;
+export default withRouter(NewOrder);

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductQuantityForm = (props) => {
 
-    const { product, index, handleChange } = props;
+    const { product, index, handleChange, deleteProduct } = props;
 
     return ( 
         <li>
@@ -20,7 +20,10 @@ const ProductQuantityForm = (props) => {
                         onChange={(e) => handleChange(e, index)}  
                     />
                 </div>
-                <button type="button" className="btn btn-rojo">
+                <button 
+                    type="button" 
+                    className="btn btn-rojo"
+                    onClick={() => deleteProduct(product._id)}>
                     <i className="fas fa-minus-circle"></i>
                         Eliminar Producto
                 </button>
