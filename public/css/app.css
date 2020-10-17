@@ -336,6 +336,30 @@ form .campo {
     align-items: center;
     margin-bottom: 2rem;
 }
+
+.search-form .campo {
+    padding: .5rem 2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.search-form .campo label {
+    font-weight: bold;
+    font-family: var(--fontTexto);
+    flex: 0 0 100px;
+}
+
+.search-form .campo input:not([type="submit"]){
+    padding: 1.5rem;
+    flex: 1;
+    border: 1px solid #e1e1e1;
+}
+
+.search-form .campo input[readonly] {
+    background-color: #e1e1e1;
+}
+
 form .campo label {
     font-weight: bold;
     font-family: var(--fontTexto);

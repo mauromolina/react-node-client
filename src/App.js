@@ -5,11 +5,12 @@ import Nav from './components/layout/Nav';
 import Clients from './components/clients/Clients';
 import NewClient from './components/clients/newClient';
 import EditClient from './components/clients/editClient';
-import Orders from './components/orders/Orders';
 import Products from './components/products/Products';
 import Product from './components/products/Product';
 import NewProduct from './components/products/newProduct';
 import EditProduct from './components/products/editProduct';
+import Orders from './components/orders/Orders';
+import NewOrder from './components/orders/newOrder';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route exact path="/products/new" component={NewProduct}/>
             <Route exact path="/products/edit/:id" component={EditProduct}/>
             <Route exact path="/orders" component={Orders}/>
+            <Route exact path="/orders/new/:id" component={NewOrder}/>
           </Switch>
         </main>
       </div>
